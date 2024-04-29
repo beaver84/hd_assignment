@@ -8,3 +8,14 @@ spring:
     url: jdbc:h2:~/hospital
     username: sa
     password: test2560
+
+  jpa:
+    show_spl: true
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          format_sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
