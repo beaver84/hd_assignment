@@ -1,9 +1,11 @@
 package com.hdjuction.project.controller;
 
 import com.hdjuction.project.model.dto.PatientRequest;
+import com.hdjuction.project.model.dto.PatientResponse;
 import com.hdjuction.project.model.entity.Patient;
 import com.hdjuction.project.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +53,15 @@ public class PatientController {
     @DeleteMapping("/{id}")
     public void deletePatient(
             @PathVariable(name = "id")
-            String id) {
+            Long id) {
         patientService.deletePatient(id);
+    }
+
+    @Description("환자 조회")
+    @GetMapping("/{id}/details")
+    public PatientResponse getPatientAndVisitInfo(
+            @PathVariable(name = "id")
+            Long id) {
+        return patientService.getPatientAndVisitInfo(id);
     }
 }

@@ -6,12 +6,10 @@ import com.hdjuction.project.model.entity.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface VisitRepository extends JpaRepository<Visit, Long>{
 
-    Visit findByHospital(Hospital hospital);
-
-    Patient findByPatient(Patient patient);
-
-    void deleteByVisitId(Long id);
+    List<Visit> findAllByPatient(Patient patient);
 }
