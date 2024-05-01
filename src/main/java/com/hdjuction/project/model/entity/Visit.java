@@ -1,12 +1,18 @@
 package com.hdjuction.project.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "visit")
 public class Visit {
@@ -16,21 +22,23 @@ public class Visit {
     private Long visitId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id", nullable = false)
+    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
+    @JsonIgnore
     private Hospital hospital;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id", referencedColumnName = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
+    @JsonIgnore
     private Patient patient;
 
-    @Column(name = "receipt_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime receiptDate;
+    @Column(name = "receipt_date", nullable = false, length = 20)
+    private String receiptDate;
 
     @Column(name = "visit_status_code", nullable = false, length = 10)
     private String visitStatusCode;
 
-    public Visit(Long visitId, Hospital hospital, Patient patient, LocalDateTime receiptDate, String visitStatusCode) {
+    @Builder
+    public Visit(Long visitId, Hospital hospital, Patient patient, String receiptDate, String visitStatusCode) {
         this.visitId = visitId;
         this.hospital = hospital;
         this.patient = patient;
@@ -38,5 +46,5 @@ public class Visit {
         this.visitStatusCode = visitStatusCode;
     }
 
-    protected Visit() {}
+    public Visit() {}
 }
