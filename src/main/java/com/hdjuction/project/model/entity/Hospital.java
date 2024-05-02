@@ -24,15 +24,4 @@ public class Hospital {
     @Column(name = "hospital_chief_name", nullable = false, length = 10)
     private String hospitalChiefName;
 
-    @Builder
-    public Hospital(Long hospitalId, String hospitalName, String medicalCareNo, String hospitalChiefName) {
-        this.hospitalId = hospitalId;
-        this.hospitalName = hospitalName;
-        this.medicalCareNo = medicalCareNo;
-        this.hospitalChiefName = hospitalChiefName;
-    }
-
-    public Hospital() {
-
-    }
 }

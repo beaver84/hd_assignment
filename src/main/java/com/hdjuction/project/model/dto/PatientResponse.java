@@ -1,16 +1,12 @@
 package com.hdjuction.project.model.dto;
 
-import com.hdjuction.project.model.entity.Hospital;
 import com.hdjuction.project.model.entity.Visit;
-import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class PatientResponse {
     private String patientName;
 
@@ -23,9 +19,6 @@ public class PatientResponse {
     private String telNo;
 
     private List<Visit> visitList;
-
-    public PatientResponse() {
-    }
 
     @Builder
     public PatientResponse(String patientName, String patientNo, String sexCode, String birthday, String telNo, List<Visit> visitList) {

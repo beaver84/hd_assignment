@@ -4,7 +4,6 @@ import com.hdjuction.project.config.exception.ApiException;
 import com.hdjuction.project.model.dto.PagePatientsRequest;
 import com.hdjuction.project.model.dto.PatientRequest;
 import com.hdjuction.project.model.dto.PatientResponse;
-import com.hdjuction.project.model.dto.SearchPatientRequest;
 import com.hdjuction.project.model.entity.Patient;
 import com.hdjuction.project.model.entity.Visit;
 import com.hdjuction.project.repository.PatientDSLRepository;
@@ -89,7 +88,7 @@ public class PatientService {
                 .build();
     }
 
-    public Page<Patient> getPatientsV2(SearchPatientRequest searchPatientRequest, PagePatientsRequest pageable) {
-        return patientDSLRepository.findAllV2((Pageable) pageable, searchPatientRequest);
+    public Page<Patient> getPatientsV2(String patientName, String patientNo, String birthday, PagePatientsRequest pageable) {
+        return patientDSLRepository.findAllV2(patientName, patientNo, birthday, (Pageable) pageable);
     }
 }

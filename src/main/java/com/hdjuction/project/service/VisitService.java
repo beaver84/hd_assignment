@@ -30,7 +30,7 @@ public class VisitService {
     public Long addVisit(VisitRequest visitRequest) {
         Visit visit = new Visit();
 
-        Visit visitBuilder = visit.builder().visitStatusCode(visitRequest.getVisitStatusCode())
+        Visit visitBuilder = Visit.builder().visitStatusCode(visitRequest.getVisitStatusCode())
                 .receiptDate(visitRequest.getReceiptDate())
                 .build();
         visitRepository.save(visitBuilder);

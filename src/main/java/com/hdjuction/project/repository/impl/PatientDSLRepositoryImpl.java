@@ -1,6 +1,5 @@
 package com.hdjuction.project.repository.impl;
 
-import com.hdjuction.project.model.dto.SearchPatientRequest;
 import com.hdjuction.project.model.entity.Patient;
 import com.hdjuction.project.model.entity.QPatient;
 import com.hdjuction.project.repository.PatientDSLRepository;
@@ -33,23 +32,23 @@ public class PatientDSLRepositoryImpl extends QuerydslRepositorySupport
     }
 
     @Override
-    public Page<Patient> findAllV2(Pageable pageable, SearchPatientRequest searchRequest) {
+    public Page<Patient> findAllV2(String patientName, String patientNo, String birthday, Pageable pageable) {
         QPatient qPatient = QPatient.patient;
 
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
 
         JPAQuery query = jpaQueryFactory
             .selectFrom(qPatient)
-            .where(eqPatientName(searchRequest.getPatientName())
-                    ,eqPatientNo(searchRequest.getPatientNo())
-                    ,eqBirthday(searchRequest.getBirthday())
+            .where(eqPatientName(patientName)
+                    ,eqPatientNo(patientNo)
+                    ,eqBirthday(birthday)
             );
 
         Long totalCount = jpaQueryFactory.select(qPatient.patientId.count())
             .from(qPatient)
-            .where(eqPatientName(searchRequest.getPatientName())
-                    ,eqPatientNo(searchRequest.getPatientNo())
-                    ,eqBirthday(searchRequest.getBirthday())).fetchOne();
+            .where(eqPatientName(patientName)
+                    ,eqPatientNo(patientNo)
+                    ,eqBirthday(birthday)).fetchOne();
 
         List<Patient> users = getQuerydsl().applyPagination(pageable, query).fetch();
 
