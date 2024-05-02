@@ -14,7 +14,7 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "patient_id", nullable = false)
-    private Long hospitalId;
+    private Long patientId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
@@ -39,8 +39,8 @@ public class Patient {
     public Patient() {}
 
     @Builder
-    public Patient(Long hospitalId, Hospital hospital, String patientName, String patientNo, String sexCode, String birthday, String telNo) {
-        this.hospitalId = hospitalId;
+    public Patient(Long patientId, Hospital hospital, String patientName, String patientNo, String sexCode, String birthday, String telNo) {
+        this.patientId = patientId;
         this.hospital = hospital;
         this.patientName = patientName;
         this.patientNo = patientNo;

@@ -1,11 +1,15 @@
 package com.hdjuction.project.controller;
 
+import com.hdjuction.project.config.validator.StringNotEmpty;
+import com.hdjuction.project.model.dto.PagePatientsRequest;
 import com.hdjuction.project.model.dto.PatientRequest;
 import com.hdjuction.project.model.dto.PatientResponse;
+import com.hdjuction.project.model.dto.SearchPatientRequest;
 import com.hdjuction.project.model.entity.Patient;
 import com.hdjuction.project.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,8 +65,28 @@ public class PatientController {
     }
 
     @Description("환자 목록 조회")
-    @GetMapping("/all")
-    public List<Patient> getPatients() {
+    @GetMapping("/v1/all")
+    public List<Patient> getPatientsV1() {
         return patientService.getPatients();
     }
+
+    @Description("환자 목록 조회 API ver.2")
+    @GetMapping("/v2/all")
+    public Page<Patient> getPatientsV2(
+//            @RequestParam(value = "patientName")
+//            @StringNotEmpty(message = "환자이름을 입력해주세요.")
+//            String patientName,
+//            @RequestParam(value = "patientNo")
+//            @StringNotEmpty(message = "환자등록번호를 입력해주세요.")
+//            String patientNo,
+//            @RequestParam(value = "birthday")
+//            @StringNotEmpty(message = "생년월일을 입력해주세요.")
+//            String birthday,
+            SearchPatientRequest searchPatientRequest,
+            PagePatientsRequest pageable
+
+    ) {
+        return patientService.getPatientsV2(searchPatientRequest, pageable);
+    }
+
 }

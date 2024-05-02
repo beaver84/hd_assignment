@@ -1,13 +1,18 @@
 package com.hdjuction.project.service;
 
 import com.hdjuction.project.config.exception.ApiException;
+import com.hdjuction.project.model.dto.PagePatientsRequest;
 import com.hdjuction.project.model.dto.PatientRequest;
 import com.hdjuction.project.model.dto.PatientResponse;
+import com.hdjuction.project.model.dto.SearchPatientRequest;
 import com.hdjuction.project.model.entity.Patient;
 import com.hdjuction.project.model.entity.Visit;
+import com.hdjuction.project.repository.PatientDSLRepository;
 import com.hdjuction.project.repository.PatientRepository;
 import com.hdjuction.project.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +22,15 @@ import java.util.List;
 public class PatientService {
     private final PatientRepository patientRepository;
     private final VisitRepository visitRepository;
+    private final PatientDSLRepository patientDSLRepository;
 
     @Autowired
     public PatientService(PatientRepository patientRepository,
-                          VisitRepository visitRepository) {
+                          VisitRepository visitRepository,
+                          PatientDSLRepository patientDSLRepository) {
         this.patientRepository = patientRepository;
         this.visitRepository = visitRepository;
+        this.patientDSLRepository = patientDSLRepository;
     }
 
     public Patient getPatientDetail(Long id) {
@@ -79,5 +87,9 @@ public class PatientService {
                 .telNo(patient.getTelNo())
                 .visitList(visitByPatient)
                 .build();
+    }
+
+    public Page<Patient> getPatientsV2(SearchPatientRequest searchPatientRequest, PagePatientsRequest pageable) {
+        return patientDSLRepository.findAllV2((Pageable) pageable, searchPatientRequest);
     }
 }
