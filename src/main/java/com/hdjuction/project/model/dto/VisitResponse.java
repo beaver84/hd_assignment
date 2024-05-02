@@ -20,12 +20,12 @@ public class VisitResponse {
 
     private List<Patient> patientList;
 
-    private String receiptDate;
+    private LocalDateTime receiptDate;
 
     private String visitStatusCode;
 
     @Builder
-    public VisitResponse(Long visitId, List<Hospital> hospitalList, List<Patient> patientList, String receiptDate, String visitStatusCode) {
+    public VisitResponse(Long visitId, List<Hospital> hospitalList, List<Patient> patientList, LocalDateTime receiptDate, String visitStatusCode) {
         this.visitId = visitId;
         this.hospitalList = hospitalList;
         this.patientList = patientList;

@@ -3,8 +3,6 @@ package com.hdjuction.project.service;
 import com.hdjuction.project.config.exception.ApiException;
 import com.hdjuction.project.model.dto.VisitRequest;
 import com.hdjuction.project.model.entity.Visit;
-import com.hdjuction.project.repository.HospitalRepository;
-import com.hdjuction.project.repository.PatientRepository;
 import com.hdjuction.project.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

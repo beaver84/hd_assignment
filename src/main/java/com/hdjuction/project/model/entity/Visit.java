@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -27,13 +29,13 @@ public class Visit {
     private Patient patient;
 
     @Column(name = "receipt_date", nullable = false, length = 20)
-    private String receiptDate;
+    private LocalDateTime receiptDate;
 
     @Column(name = "visit_status_code", nullable = false, length = 10)
     private String visitStatusCode;
 
     @Builder
-    public Visit(Long visitId, Hospital hospital, Patient patient, String receiptDate, String visitStatusCode) {
+    public Visit(Long visitId, Hospital hospital, Patient patient, LocalDateTime receiptDate, String visitStatusCode) {
         this.visitId = visitId;
         this.hospital = hospital;
         this.patient = patient;

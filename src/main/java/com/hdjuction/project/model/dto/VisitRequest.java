@@ -1,8 +1,8 @@
 package com.hdjuction.project.model.dto;
 
+import com.hdjuction.project.config.validator.StringNotEmpty;
 import com.hdjuction.project.model.entity.Hospital;
 import com.hdjuction.project.model.entity.Patient;
-import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +16,10 @@ public class VisitRequest {
 
     private Hospital Hospital;
 
-    @Nonnull
-    private String receiptDate;
+    @StringNotEmpty(message = "날짜를 입력해주세요")
+    private LocalDateTime receiptDate;
 
-    @Nonnull
+    @StringNotEmpty(message = "환자 상태코드를 입력해주세요")
     private String visitStatusCode;
 
 }

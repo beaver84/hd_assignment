@@ -29,11 +29,6 @@ public class PatientController {
         return patientService.getPatientDetail(id);
     }
 
-    @GetMapping("/all")
-    public List<Patient> getPatients() {
-        return patientService.getPatients();
-    }
-
     @PostMapping
     public Long addPatient(
             @RequestBody
@@ -63,5 +58,11 @@ public class PatientController {
             @PathVariable(name = "id")
             Long id) {
         return patientService.getPatientAndVisitInfo(id);
+    }
+
+    @Description("환자 목록 조회")
+    @GetMapping("/all")
+    public List<Patient> getPatients() {
+        return patientService.getPatients();
     }
 }

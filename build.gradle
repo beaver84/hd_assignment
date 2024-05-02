@@ -21,7 +21,10 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.projectlombok:lombok'
+	implementation 'jakarta.validation:jakarta.validation-api:2.0.2'
+	implementation 'org.apache.commons:commons-lang3:3.10'
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()
